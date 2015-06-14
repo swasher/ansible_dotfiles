@@ -1,0 +1,5 @@
+TODO: add ntp sync
+TODO: add ssh-agent bash path
+TODO: add autocompletion
+TODO: install mc
+TODO: setup russian console fonts
