@@ -1,0 +1,45 @@
+---
+#SSHAGENT=/usr/bin/ssh-agent
+#SSHAGENTARGS="-s"
+#if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+#    eval `$SSHAGENT $SSHAGENTARGS`
+#    trap 'kill $SSH_AGENT_PID' 0
+#fi
+
+- lineinfile:
+    create: yes
+    dest: /home/{{remote_user}}/.profile
+    insertafter: EOF
+    state: present
+    line:  SSHAGENT=/usr/bin/ssh-agent
+
+- lineinfile:
+    dest: /home/{{remote_user}}/.profile
+    insertafter: SSHAGENT=/usr/bin/ssh-agent
+    state: present
+    line: SSHAGENTARGS="-s"
+
+- lineinfile:
+    dest: /home/{{remote_user}}/.profile
+    insertafter: SSHAGENTARGS="-s"
+    state: present
+    line: if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+
+- lineinfile:
+    dest: /home/{{remote_user}}/.profile
+    insertafter: if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+    state: present
+    line: "    eval `$SSHAGENT $SSHAGENTARGS`"
+
+- lineinfile:
+    dest: /home/{{remote_user}}/.profile
+    insertafter: "    eval `$SSHAGENT $SSHAGENTARGS`"
+    state: present
+    line: "    trap 'kill $SSH_AGENT_PID' 0"
+
+- lineinfile:
+    dest: /home/{{remote_user}}/.profile
+    insertafter: "    trap 'kill $SSH_AGENT_PID' 0"
+    state: present
+    line: fi
+
