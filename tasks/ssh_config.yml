@@ -1,4 +1,6 @@
 ---
+- include_vars: vault.yml
+
 - name: Ensure .ssh dir exist
   file: >
     path: /home/{{remote_user}}/.ssh
