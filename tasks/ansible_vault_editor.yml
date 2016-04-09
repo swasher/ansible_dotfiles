@@ -6,6 +6,5 @@
   sudo: yes
 
 - name: Set ansible default editor right now
-  #shell: "echo $MY_ENV_VARIABLE"
   environment:
     EDITOR: {{ansible_editor}}
