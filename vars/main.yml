@@ -1,3 +1,1 @@
 ---
-apt_cache_valid_time: 86400
-remote_user: {{vault_remote_user}}

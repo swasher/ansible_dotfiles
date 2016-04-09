@@ -1,1 +1,3 @@
 ansible_editor: mcedit
+remote_user: "{{ansible_user_id}}"
+apt_cache_valid_time: 86400

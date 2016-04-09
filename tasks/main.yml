@@ -2,3 +2,4 @@
 - include: ssh-agent.yml
 - include: ssh_config.yml
 - include: ansible_vault_editor.yml
+- include: apt_packages.yml
