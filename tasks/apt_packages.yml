@@ -1,0 +1,10 @@
+---
+- name: Install nessesery apt packages
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+    cache_valid_time={{ apt_cache_valid_time }}
+  with_items:
+    - mc
+  become: yes
