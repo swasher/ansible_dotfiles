@@ -1,11 +1,11 @@
 ---
 - name: Ensure .ssh dir exist
   file: >
-    path=/home/{{remote_user}}/.ssh
-    state=directory
+    path: /home/{{remote_user}}/.ssh
+    state: directory
 
 - name: Copy github private key
-  copy:
+  copy: >
     content: "{{github_private_key_content}}"
     dest: "/home/{{remote_user}}/.ssh/github"
     owner: "{{remote_user}}"
@@ -15,15 +15,14 @@
   become: true
 
 - name: Make .config
-  lineinfile: >
-    dest=/home/{{remote_user}}/.ssh/config
-    line="{{ item }}"
-    owner={{remote_user}}
-    group={{remote_user}}
-    mode=0600
-  with_items:
-    - "Host github.com"
-    - "    HostName github.com"
-    - "    User git"
-    - "    IdentityFile ~/.ssh/github"
+  blockinfile: >
+    dest: /home/{{remote_user}}/.ssh/config
+    owner: {{remote_user}}
+    group: {{remote_user}}
+    mode: 0600
+    block: |
+      Host github.com
+          HostName github.com
+          User git
+          IdentityFile ~/.ssh/github
   become: yes

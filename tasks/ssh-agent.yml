@@ -7,52 +7,52 @@
 #fi
 
 - name: Launch user agent
-  lineinfile: >
-    dest=/home/{{remote_user}}/.bashrc
-    line="{{ item }}"
-  with_items:
-    - "\n"
-    - "SSHAGENT=/usr/bin/ssh-agent"
-    - "SSHAGENTARGS="-s""
-    - "if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then"
-    - "    eval `$SSHAGENT $SSHAGENTARGS`"
-    - "    trap 'kill $SSH_AGENT_PID' 0"
-    - "fi"
+  blockfile: >
+    dest: /home/{{remote_user}}/.bashrc
+    block: |
+      \n
+      SSHAGENT=/usr/bin/ssh-agent
+      SSHAGENTARGS='-s'
+      if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+          eval `$SSHAGENT $SSHAGENTARGS`
+          trap 'kill $SSH_AGENT_PID' 0
+      fi
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
   become: yes
 
 #- lineinfile:
 #    create: yes
-#    dest: /home/{{remote_user}}/.profile
+#    dest: /home/{{remote_user}}/.bashrc
 #    insertafter: EOF
 #    state: present
 #    line:  SSHAGENT=/usr/bin/ssh-agent
 #
 #- lineinfile:
-#    dest: /home/{{remote_user}}/.profile
+#    dest: /home/{{remote_user}}/.bashrc
 #    insertafter: SSHAGENT=/usr/bin/ssh-agent
 #    state: present
 #    line: SSHAGENTARGS="-s"
 #
 #- lineinfile:
-#    dest: /home/{{remote_user}}/.profile
+#    dest: /home/{{remote_user}}/.bashrc
 #    insertafter: SSHAGENTARGS="-s"
 #    state: present
 #    line: if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
 #
 #- lineinfile:
-#    dest: /home/{{remote_user}}/.profile
+#    dest: /home/{{remote_user}}/.bashrc
 #    insertafter: if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
 #    state: present
 #    line: "    eval `$SSHAGENT $SSHAGENTARGS`"
 #
 #- lineinfile:
-#    dest: /home/{{remote_user}}/.profile
+#    dest: /home/{{remote_user}}/.bashrc
 #    insertafter: "    eval `$SSHAGENT $SSHAGENTARGS`"
 #    state: present
 #    line: "    trap 'kill $SSH_AGENT_PID' 0"
 #
 #- lineinfile:
-#    dest: /home/{{remote_user}}/.profile
+#    dest: /home/{{remote_user}}/.bashrc
 #    insertafter: "    trap 'kill $SSH_AGENT_PID' 0"
 #    state: present
 #    line: fi
