@@ -1,0 +1,6 @@
+---
+- name: Download heroku completions
+  get_url:
+    url: https://raw.githubusercontent.com/stefansundin/heroku-bash-completion/master/heroku-completion.bash
+    dest: /etc/bash_completion.d/heroku
+  become: yes
