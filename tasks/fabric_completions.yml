@@ -1,0 +1,6 @@
+---
+- name: Download fabric completions
+  get_url:
+    url: https://raw.githubusercontent.com/underself/fabric-completion/master/fabric-completion.bash
+    dest: /etc/bash_completion.d/fabric
+  become: yes
