@@ -1,0 +1,6 @@
+---
+- name: Download django completions
+  get_url:
+    url: https://raw.githubusercontent.com/django/django/master/extras/django_bash_completion
+    dest: /etc/bash_completion.d/django
+  become: yes
