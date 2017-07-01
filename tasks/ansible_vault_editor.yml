@@ -1,10 +1,6 @@
 ---
-- name: Set ansible default editor at boot
-  lineinfile: >
-    dest=/etc/environment
-    line=EDITOR="{{ansible_editor}}"
-  sudo: yes
-
-- name: Set ansible default editor right now
-  environment:
-    EDITOR: {{ansible_editor}}
+- name: Set default editor for ansible-vault
+  lineinfile: 
+    dest: /etc/environment
+    line: 'EDITOR=mcedit'
+  become: yes
