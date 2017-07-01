@@ -1,0 +1,7 @@
+---
+- name: get pip completion
+  shell:
+    source {{virtualenv}}/bin/activate && pip completion --bash > /etc/bash_completion.d/pip
+  args:
+      executable: /bin/bash
+  become: yes
