@@ -1,5 +1,5 @@
 ---
 - name: Eval for ssh-add
-- lineinfile:
+  lineinfile:
     path: "{{ user_home }}"/.bashrc
     line: eval "$(ssh-agent -s)"
